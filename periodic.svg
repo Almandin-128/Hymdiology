@@ -1,0 +1,1300 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1455" height="450" viewBox="0 0 1455 450">
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --gap: 4px;
+            --noble-color: #00d4ff;
+        }
+
+        .periodic-table {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap);
+            padding: 15px;
+            width: 98vw;
+            margin: 0 auto;
+            box-sizing: border-box;
+            background: var(--bg-color);
+            border-radius: 20px;
+
+        }
+
+        .period-row {
+            display: grid;
+            grid-template-columns: repeat(27, 1fr);
+            grid-gap: var(--gap);
+        }
+
+        .cell {
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            color: #888;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8%;
+            /* Padding proportionnel à la taille de la case */
+            box-sizing: border-box;
+            border-radius: 4px;
+            background: #1a1a1a;
+            border: 1px solid #222;
+            transition: transform 0.2s;
+        }
+
+        /* --- RATIO TEXTE / CASE --- */
+
+        .top-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: calc(100% * 0.4);
+            line-height: 1;
+            color: #888;
+        }
+
+        .symbol {
+            font-weight: bold;
+            font-size: calc(100% * 0.7);
+            text-align: center;
+            margin: auto 0;
+        }
+
+        .name {
+            font-size: calc(100% * 0.35);
+            text-transform: uppercase;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cell:not(.empty):hover {
+            transform: scale(1.2);
+            z-index: 10;
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .empty {
+            background: transparent;
+            border: none;
+        }
+
+        .mass {
+            color: #aaa;
+            font-style: italic;
+        }
+
+
+
+        .noble {
+            border: 1px solid var(--noble-color);
+            color: var(--noble-color);
+            background: rgba(0, 212, 255, 0.1);
+        }
+        
+    </style>
+    <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:sans-serif; color: black; background: white;">
+            <div id="periodic-table" class="periodic-table">
+                <div class="period-row">
+                    <div class="cell " style="border-top: 3px solid rgb(40, 43, 119);">
+                        <div class="top-info">
+                            <span>1</span>
+                            <span class="mass">1.370</span>
+                        </div>
+                        <div class="symbol">A</div>
+                        <div class="name">Alphanium</div>
+                    </div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell " style="border-top: 3px solid rgb(32, 126, 40);">
+                        <div class="top-info">
+                            <span>2</span>
+                            <span class="mass">3.917</span>
+                        </div>
+                        <div class="symbol">Av</div>
+                        <div class="name">Avidium</div>
+                    </div>
+                    <div class="cell noble" style="border-top: 3px solid rgb(126, 101, 32);">
+                        <div class="top-info">
+                            <span>3</span>
+                            <span class="mass">5.865</span>
+                        </div>
+                        <div class="symbol">S</div>
+                        <div class="name">Stalium</div>
+                    </div>
+                </div>
+                <div class="period-row">
+                    <div class="cell " style="border-top: 3px solid rgb(0, 153, 77);">
+                        <div class="top-info">
+                            <span>4</span>
+                            <span class="mass">7.855</span>
+                        </div>
+                        <div class="symbol">D</div>
+                        <div class="name">Deltanium</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(151, 17, 17);">
+                        <div class="top-info">
+                            <span>5</span>
+                            <span class="mass">10.405</span>
+                        </div>
+                        <div class="symbol">K</div>
+                        <div class="name">Chrysterine</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(151, 17, 17);">
+                        <div class="top-info">
+                            <span>6</span>
+                            <span class="mass">12.361</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>7</span>
+                            <span class="mass">14.315</span>
+                        </div>
+                        <div class="symbol">F</div>
+                        <div class="name">Fluxium</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(40, 43, 119);">
+                        <div class="top-info">
+                            <span>8</span>
+                            <span class="mass">16.266</span>
+                        </div>
+                        <div class="symbol">C</div>
+                        <div class="name">Carbon</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(40, 43, 119);">
+                        <div class="top-info">
+                            <span>9</span>
+                            <span class="mass">18.215</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(40, 43, 119);">
+                        <div class="top-info">
+                            <span>10</span>
+                            <span class="mass">20.162</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(32, 126, 40);">
+                        <div class="top-info">
+                            <span>11</span>
+                            <span class="mass">22.107</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell noble" style="border-top: 3px solid rgb(126, 101, 32);">
+                        <div class="top-info">
+                            <span>12</span>
+                            <span class="mass">24.050</span>
+                        </div>
+                        <div class="symbol">N</div>
+                        <div class="name">Néon</div>
+                    </div>
+                </div>
+                <div class="period-row">
+                    <div class="cell " style="border-top: 3px solid rgb(0, 153, 77);">
+                        <div class="top-info">
+                            <span>13</span>
+                            <span class="mass">26.713</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(151, 17, 17);">
+                        <div class="top-info">
+                            <span>14</span>
+                            <span class="mass">28.661</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(151, 17, 17);">
+                        <div class="top-info">
+                            <span>15</span>
+                            <span class="mass">30.607</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell " style="border-top: 3px solid rgb(255, 156, 26);">
+                        <div class="top-info">
+                            <span>16</span>
+                            <span class="mass">32.550</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>17</span>
+                            <span class="mass">34.491</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(40, 43, 119);">
+                        <div class="top-info">
+                            <span>18</span>
+                            <span class="mass">36.431</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(40, 43, 119);">
+                        <div class="top-info">
+                            <span>19</span>
+                            <span class="mass">38.367</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(32, 126, 40);">
+                        <div class="top-info">
+                            <span>20</span>
+                            <span class="mass">40.302</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell noble" style="border-top: 3px solid rgb(126, 101, 32);">
+                        <div class="top-info">
+                            <span>21</span>
+                            <span class="mass">42.824</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                </div>
+                <div class="period-row">
+                    <div class="cell " style="border-top: 3px solid rgb(0, 153, 77);">
+                        <div class="top-info">
+                            <span>22</span>
+                            <span class="mass">44.992</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(151, 17, 17);">
+                        <div class="top-info">
+                            <span>23</span>
+                            <span class="mass">46.943</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(151, 17, 17);">
+                        <div class="top-info">
+                            <span>24</span>
+                            <span class="mass">48.893</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(93, 68, 136);">
+                        <div class="top-info">
+                            <span>25</span>
+                            <span class="mass">50.842</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(93, 68, 136);">
+                        <div class="top-info">
+                            <span>26</span>
+                            <span class="mass">52.790</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(93, 68, 136);">
+                        <div class="top-info">
+                            <span>27</span>
+                            <span class="mass">54.737</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell " style="border-top: 3px solid rgb(93, 68, 136);">
+                        <div class="top-info">
+                            <span>28</span>
+                            <span class="mass">56.683</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(93, 68, 136);">
+                        <div class="top-info">
+                            <span>29</span>
+                            <span class="mass">58.628</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(93, 68, 136);">
+                        <div class="top-info">
+                            <span>30</span>
+                            <span class="mass">61.162</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(93, 68, 136);">
+                        <div class="top-info">
+                            <span>31</span>
+                            <span class="mass">63.104</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(93, 68, 136);">
+                        <div class="top-info">
+                            <span>32</span>
+                            <span class="mass">65.046</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(93, 68, 136);">
+                        <div class="top-info">
+                            <span>33</span>
+                            <span class="mass">66.986</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(255, 156, 26);">
+                        <div class="top-info">
+                            <span>34</span>
+                            <span class="mass">68.925</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(255, 156, 26);">
+                        <div class="top-info">
+                            <span>35</span>
+                            <span class="mass">70.863</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>36</span>
+                            <span class="mass">72.800</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(40, 43, 119);">
+                        <div class="top-info">
+                            <span>37</span>
+                            <span class="mass">74.736</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(32, 126, 40);">
+                        <div class="top-info">
+                            <span>38</span>
+                            <span class="mass">77.260</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="cell noble" style="border-top: 3px solid rgb(126, 101, 32);">
+                        <div class="top-info">
+                            <span>39</span>
+                            <span class="mass">79.194</span>
+                        </div>
+                        <div class="symbol"></div>
+                        <div class="name"></div>
+                    </div>
+                </div>
+                <div class="period-row">
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>40</span>
+                            <span class="mass">81.534</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>41</span>
+                            <span class="mass">83.475</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>42</span>
+                            <span class="mass">85.415</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>43</span>
+                            <span class="mass">87.354</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>44</span>
+                            <span class="mass">89.292</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>45</span>
+                            <span class="mass">91.229</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell empty"></div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>46</span>
+                            <span class="mass">93.755</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>47</span>
+                            <span class="mass">95.690</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>48</span>
+                            <span class="mass">97.623</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>49</span>
+                            <span class="mass">99.555</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>50</span>
+                            <span class="mass">101.486</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>51</span>
+                            <span class="mass">103.417</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>52</span>
+                            <span class="mass">105.345</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>53</span>
+                            <span class="mass">107.273</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>54</span>
+                            <span class="mass">109.200</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>55</span>
+                            <span class="mass">111.715</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>56</span>
+                            <span class="mass">113.640</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell noble" style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>57</span>
+                            <span class="mass">115.563</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                </div>
+                <div class="period-row">
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>58</span>
+                            <span class="mass">118.087</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>59</span>
+                            <span class="mass">120.029</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>60</span>
+                            <span class="mass">121.971</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>61</span>
+                            <span class="mass">123.912</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>62</span>
+                            <span class="mass">125.852</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>63</span>
+                            <span class="mass">128.383</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>64</span>
+                            <span class="mass">130.321</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>65</span>
+                            <span class="mass">132.259</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>66</span>
+                            <span class="mass">134.196</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>67</span>
+                            <span class="mass">136.132</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>68</span>
+                            <span class="mass">138.068</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>69</span>
+                            <span class="mass">140.003</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>70</span>
+                            <span class="mass">141.937</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>71</span>
+                            <span class="mass">144.461</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>72</span>
+                            <span class="mass">146.394</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>73</span>
+                            <span class="mass">148.326</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>74</span>
+                            <span class="mass">150.257</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>75</span>
+                            <span class="mass">152.187</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>76</span>
+                            <span class="mass">154.117</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>77</span>
+                            <span class="mass">156.046</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>78</span>
+                            <span class="mass">157.974</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>79</span>
+                            <span class="mass">159.902</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>80</span>
+                            <span class="mass">162.418</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>81</span>
+                            <span class="mass">164.344</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>82</span>
+                            <span class="mass">166.269</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>83</span>
+                            <span class="mass">168.194</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell noble" style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>84</span>
+                            <span class="mass">170.118</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                </div>
+                <div class="period-row">
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>85</span>
+                            <span class="mass">172.905</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>86</span>
+                            <span class="mass">174.837</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>87</span>
+                            <span class="mass">176.769</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>88</span>
+                            <span class="mass">179.291</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>89</span>
+                            <span class="mass">181.221</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>90</span>
+                            <span class="mass">183.150</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>91</span>
+                            <span class="mass">185.079</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>92</span>
+                            <span class="mass">187.006</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>93</span>
+                            <span class="mass">188.933</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>94</span>
+                            <span class="mass">190.859</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>95</span>
+                            <span class="mass">192.785</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>96</span>
+                            <span class="mass">195.300</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>97</span>
+                            <span class="mass">197.224</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>98</span>
+                            <span class="mass">199.148</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>99</span>
+                            <span class="mass">201.070</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>100</span>
+                            <span class="mass">202.992</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>101</span>
+                            <span class="mass">204.913</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>102</span>
+                            <span class="mass">206.833</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>103</span>
+                            <span class="mass">208.753</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>104</span>
+                            <span class="mass">210.671</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>105</span>
+                            <span class="mass">213.179</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>106</span>
+                            <span class="mass">215.097</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>107</span>
+                            <span class="mass">217.013</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>108</span>
+                            <span class="mass">218.929</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>109</span>
+                            <span class="mass">220.844</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>110</span>
+                            <span class="mass">222.758</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell noble" style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>111</span>
+                            <span class="mass">224.672</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                </div>
+                <div class="period-row">
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>112</span>
+                            <span class="mass">227.724</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>113</span>
+                            <span class="mass">230.238</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>114</span>
+                            <span class="mass">232.159</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>115</span>
+                            <span class="mass">234.079</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>116</span>
+                            <span class="mass">235.999</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>117</span>
+                            <span class="mass">237.918</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>118</span>
+                            <span class="mass">239.836</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>119</span>
+                            <span class="mass">241.754</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>120</span>
+                            <span class="mass">243.670</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>121</span>
+                            <span class="mass">246.177</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>122</span>
+                            <span class="mass">248.093</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>123</span>
+                            <span class="mass">250.007</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>124</span>
+                            <span class="mass">251.921</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>125</span>
+                            <span class="mass">253.834</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>126</span>
+                            <span class="mass">255.746</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>127</span>
+                            <span class="mass">257.658</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>128</span>
+                            <span class="mass">259.569</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>129</span>
+                            <span class="mass">261.479</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>130</span>
+                            <span class="mass">263.978</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>131</span>
+                            <span class="mass">265.887</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>132</span>
+                            <span class="mass">267.795</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>133</span>
+                            <span class="mass">269.702</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>134</span>
+                            <span class="mass">271.608</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>135</span>
+                            <span class="mass">273.514</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>136</span>
+                            <span class="mass">275.419</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell " style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>137</span>
+                            <span class="mass">277.323</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                    <div class="cell noble" style="border-top: 3px solid rgb(102, 102, 102);">
+                        <div class="top-info">
+                            <span>138</span>
+                            <span class="mass">279.816</span>
+                        </div>
+                        <div class="symbol">Unk</div>
+                        <div class="name">Inconnu</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </foreignObject>
+</svg>
