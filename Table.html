@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Périodique</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --gap: 4px;
+            --noble-color: #00d4ff;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+        }
+
+
+        h1 {
+            font-weight: 300;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+        }
+
+        .periodic-table {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap);
+            padding: 15px;
+            width: 98vw;
+            margin: 0 auto;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+
+        }
+
+        .period-row {
+            display: grid;
+            grid-template-columns: repeat(27, 1fr);
+            grid-gap: var(--gap);
+        }
+
+        .cell {
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8%;
+            /* Padding proportionnel à la taille de la case */
+            box-sizing: border-box;
+            border-radius: 4px;
+            background: #1a1a1a;
+            border: 1px solid #222;
+            transition: transform 0.2s;
+        }
+
+        /* --- RATIO TEXTE / CASE --- */
+
+        .top-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: calc(100% * 0.4);
+            line-height: 1;
+            color: #888;
+        }
+
+        .symbol {
+            font-weight: bold;
+            font-size: calc(100% * 0.7);
+            text-align: center;
+            margin: auto 0;
+        }
+
+        .name {
+            font-size: calc(100% * 0.35);
+            text-transform: uppercase;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cell:not(.empty):hover {
+            transform: scale(1.2);
+            z-index: 10;
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .empty {
+            background: transparent;
+            border: none;
+        }
+
+        .mass {
+            color: #aaa;
+            font-style: italic;
+        }
+
+
+
+        .noble {
+            border: 1px solid var(--noble-color);
+            color: var(--noble-color);
+            background: rgba(0, 212, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>TABLEAU PERIODIQUE</h1>
+    <div id="periodic-table" class="periodic-table"></div>
+    <script>
+        class chargeVector {
+            constructor(charge, angle) {
+                switch (angle) {
+                    case 'hym':
+                        angle = 0;
+                        break;
+                    case 'dio':
+                        angle = 120;
+                        break;
+                    case 'log':
+                        angle = 240;
+                        break;
+                }
+
+                this.charge = charge;
+                this.angle = angle;
+            }
+
+            static sum(vectors) {
+                let sumX = 0;
+                let sumY = 0;
+
+                vectors.forEach(v => {
+                    const rad = (v.angle * Math.PI) / 180;
+                    sumX += v.charge * Math.cos(rad);
+                    sumY += v.charge * Math.sin(rad);
+                });
+
+                const totalCharge = Math.sqrt(sumX * sumX + sumY * sumY);
+
+                let totalAngle = (Math.atan2(sumY, sumX) * 180) / Math.PI;
+                if (totalAngle < 0) totalAngle += 360;
+
+                return {
+                    charge: Math.round(totalCharge * 1e10) / 1e10,
+                    angle: Math.round(totalAngle * 1e10) / 1e10
+                };
+            }
+        }
+
+        class particule {
+            constructor(weight, charge, orientation = -1) {
+                this.weight = weight;
+                if (orientation == -1) {
+                    this.charge = charge; // Reçoit un objet chargeVector
+                } else {
+                    this.charge = new chargeVector(charge, orientation);
+                }
+            }
+
+            static scale(p, factor) {
+                return new particule(
+                    p.weight * factor,
+                    new chargeVector(p.charge.charge * factor, p.charge.angle)
+                );
+            }
+        }
+
+        const C_GLYON = 92.85; // Constante fondamentale de l'interaction forte (Glyon)
+        const C_AGITATION = 12.45; // Constante de l'agitation;
+        const Kw = 0.0031944; //Constante de Water
+        const M_EON = 0.00165; // Masse de l'éon (très léger, comme l'électron)
+
+        const [Water, Fire, Air] = [new particule(1, 1, 'hym'), new particule(1.0025, 1, 'dio'), new particule(0.9980, 1, 'log')];
+        const [Drop, Flame, Draft] = [new particule(Water.weight * 9, 1, 'hym'), new particule(Fire.weight * 9, 1, 'dio'), new particule(Air.weight * 9, 1, 'log')];
+        const [Stain, Ash, Void] = [new particule(Water.weight * 81, 1, 'hym'), new particule(Fire.weight * 81, 1, 'dio'), new particule(Air.weight * 81, 1, 'log')];
+
+        const [neutrinoEonique, neutrinoVolonique, neutrinoKaronique] = [new particule(0, 0, 0), new particule(0, 0, 0), new particule(0, 0, 0)];
+        const [eon, volon, karon] = [new particule(1, 1, 'hym'), new particule(1, 1, 'dio'), new particule(1, 1, 'log')];
+        const [eka, volka, karka] = [new particule(0.5, -0.5, 'hym'), new particule(0.5, -0.5, 'dio'), new particule(0.5, -0.5, 'log')];
+
+        function GlyonLink(k) {
+            return C_GLYON / Math.sqrt(k);
+        }
+
+        function HadronWeight(trions) {
+            return trions * GlyonLink(trions) + (C_AGITATION * Math.sqrt(trions));
+        }
+
+        function createParticule(elements, type) {
+            let weight = 0;
+            let chargeList = [];
+
+            elements.forEach(elem => {
+                weight += elem.weight;
+                chargeList.push(elem.charge);
+            });
+
+            switch (type) {
+                case 'hadron':
+                    weight += HadronWeight(elements.length);
+                    weight *= Kw;
+                    break;
+            }
+
+            return new particule(weight, chargeVector.sum(chargeList));
+        }
+
+
+        const STYRION = createParticule([Water, Fire, Air, Fire], 'hadron');
+        const KYNON = createParticule([Water, Fire, Air, Air], 'hadron');
+        const NEUTRON = createParticule([Water, Fire, Air], 'hadron');
+    </script>
+
+    <script>
+        // --- CONFIGURATION DE L'AFFICHAGE ---
+        const COLOR_BY_GROUP = true; // True: Couleurs par groupes | False: Couleurs par périodes
+
+        // --- CONSTANTES DE PHYSIQUE TRIADIQUE ---
+
+        const periodCapacities = [3, 9, 9, 18, 18, 27, 27, 27];
+        const totalCols = periodCapacities[periodCapacities.length - 1];
+
+        const elementRegistry = {
+            1: { symbol: "A", name: "Alphanium", bloc: "Non-métaux réactifs", desc: "" },
+            2: { symbol: "Av", name: "Avidium", bloc: "Halogène", desc: "" },
+            3: { symbol: "S", name: "Stalium", bloc: "Gaz Nobles", desc: "" },
+            4: { symbol: "D", name: "Deltanium", bloc: "Métaux Alcalins", desc: "" },
+            5: { symbol: "K", name: "Chrysterine", bloc: "Métaux Alcalino-Terreux", desc: "" },
+            6: { symbol: "", name: "", bloc: "Métaux Alcalino-Terreux", desc: "" },
+            7: { symbol: "F", name: "Fluxium", bloc: "Métalloïdes", desc: "" },
+            8: { symbol: "C", name: "Carbon", bloc: "Non-métaux réactifs", desc: "" },
+            9: { symbol: "", name: "", bloc: "Non-métaux réactifs", desc: "" },
+            10: { symbol: "", name: "", bloc: "Non-métaux réactifs", desc: "" },
+            11: { symbol: "", name: "", bloc: "Halogène", desc: "" },
+            12: { symbol: "N", name: "Néon", bloc: "Gaz Nobles", desc: "" },
+            13: { symbol: "", name: "", bloc: "Métaux Alcalins", desc: "" },
+            14: { symbol: "", name: "", bloc: "Métaux Alcalino-Terreux", desc: "" },
+            15: { symbol: "", name: "", bloc: "Métaux Alcalino-Terreux", desc: "" },
+            16: { symbol: "", name: "", bloc: "Métaux de post-transition", desc: "" },
+            17: { symbol: "", name: "", bloc: "Métalloïdes", desc: "" },
+            18: { symbol: "", name: "", bloc: "Non-métaux réactifs", desc: "" },
+            19: { symbol: "", name: "", bloc: "Non-métaux réactifs", desc: "" },
+            20: { symbol: "", name: "", bloc: "Halogène", desc: "" },
+            21: { symbol: "", name: "", bloc: "Gaz Nobles", desc: "" },
+            22: { symbol: "", name: "", bloc: "Métaux Alcalins", desc: "" },
+            23: { symbol: "", name: "", bloc: "Métaux Alcalino-Terreux", desc: "" },
+            24: { symbol: "", name: "", bloc: "Métaux Alcalino-Terreux", desc: "" },
+            25: { symbol: "", name: "", bloc: "Métaux de transition", desc: "" },
+            26: { symbol: "", name: "", bloc: "Métaux de transition", desc: "" },
+            27: { symbol: "", name: "", bloc: "Métaux de transition", desc: "" },
+            28: { symbol: "", name: "", bloc: "Métaux de transition", desc: "" },
+            29: { symbol: "", name: "", bloc: "Métaux de transition", desc: "" },
+            30: { symbol: "", name: "", bloc: "Métaux de transition", desc: "" },
+            31: { symbol: "", name: "", bloc: "Métaux de transition", desc: "" },
+            32: { symbol: "", name: "", bloc: "Métaux de transition", desc: "" },
+            33: { symbol: "", name: "", bloc: "Métaux de transition", desc: "" },
+            34: { symbol: "", name: "", bloc: "Métaux de post-transition", desc: "" },
+            35: { symbol: "", name: "", bloc: "Métaux de post-transition", desc: "" },
+            36: { symbol: "", name: "", bloc: "Métalloïdes", desc: "" },
+            37: { symbol: "", name: "", bloc: "Non-métaux réactifs", desc: "" },
+            38: { symbol: "", name: "", bloc: "Halogène", desc: "" },
+            39: { symbol: "", name: "", bloc: "Gaz Nobles", desc: "" },
+        };
+
+        const groupColors = {
+            "Non-métaux réactifs": 'hsl(237 50% 31%)',
+            "Halogène": 'hsl(125 60% 31%)',
+            "Gaz Nobles": 'hsl(44 60% 31%)',
+            "Métaux Alcalins": 'hsl(150 100% 30%)',
+            "Métaux Alcalino-Terreux": 'hsl(0 80% 33%)',
+            "Métalloïdes": 'hsl(162 0% 40%)',
+            'Métaux de transition': 'hsl(262 33% 40%)',
+            'Métaux de post-transition': 'hsl(34 100% 55%)',
+            "Inconnu": 0
+        };
+
+        const tableContainer = document.getElementById('periodic-table');
+
+        function calculerMasse(zt, n, progression) {
+
+            const mParticules = (zt * STYRION.weight) + (zt * KYNON.weight) + (n * NEUTRON.weight) + (zt * M_EON);
+
+            return mParticules * (1 - progression);
+        }
+
+        function getInfo(atom) {
+
+            properties = elementRegistry[atom] || { symbol: "Unk", name: "Inconnu", bloc: "Inconnu" };
+
+            period = 0;
+            index = atom;
+            capacity = periodCapacities[0];
+
+            while (index > capacity) {
+                index -= capacity;
+                capacity = periodCapacities[period + 1];
+                period++;
+            }
+
+            index--;
+
+            n = Math.round(atom + (atom * 0.12))
+
+            if (atom == 1) n = 0;
+
+            progression = 0.005 * ((index + 1) / capacity);
+
+            const masseTotale = calculerMasse(atom, n, progression);
+
+
+
+            return {
+                zt: atom,
+                symbol: properties.symbol,
+                name: properties.name,
+                bloc: properties.bloc,
+                mass: masseTotale.toFixed(3),
+                isNoble: (index == capacity - 1)
+            }
+
+        }
+
+        function renderTable() {
+            let currentZt = 1;
+
+            periodCapacities.forEach((capacity, pIndex) => {
+                const row = document.createElement('div');
+                row.className = 'period-row';
+
+                // On pré-calcule les limites pour savoir où placer les atomes sur les 27 colonnes
+                const leftLimit = Math.floor(capacity / 3);
+                const rightLimit = totalCols - (capacity - leftLimit) + 1;
+
+                for (let col = 1; col <= totalCols; col++) {
+                    let elementToPlace = null;
+
+                    // Condition optimisée : On ne calcule QUE si la colonne doit contenir un atome
+                    if (capacity === totalCols || col <= leftLimit || col >= rightLimit) {
+                        elementToPlace = getInfo(currentZt);
+                        currentZt++;
+                    }
+
+                    const cell = document.createElement('div');
+                    if (elementToPlace) {
+                        cell.className = `cell ${elementToPlace.isNoble ? 'noble' : ''}`;
+
+                        let color;
+                        if (COLOR_BY_GROUP) {
+                            color = groupColors[elementToPlace.bloc] || 'hsl(0, 0%, 40%)';
+                        } else {
+                            color = `hsl(${((pIndex * 60) + 200) % 360}, 70%, 50%)`;
+                        }
+
+                        cell.style.borderTop = `3px solid ${color}`;
+
+                        cell.innerHTML = `
+                            <div class="top-info">
+                                <span>${elementToPlace.zt}</span>
+                                <span class="mass">${elementToPlace.mass}</span>
+                            </div>
+                            <div class="symbol">${elementToPlace.symbol}</div>
+                            <div class="name">${elementToPlace.name}</div>
+                        `;
+                    } else {
+                        cell.className = 'cell empty';
+                    }
+                    row.appendChild(cell);
+                }
+                tableContainer.appendChild(row);
+            });
+        }
+
+        renderTable();
+    </script>
+</body>
+
+</html>
